@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeTailor</title>
+  <meta name="description" content="Tailor your resume to any job description in seconds." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo-badge">RT</div>
+      <span class="site-title">ResumeTailor</span>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container main-content">
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Tailor your resume to any job</h1>
+      <p>
+        Upload your resume and paste (or link) a job description. ResumeTailor
+        will help you see how well they match and guide you to close the gap.
+      </p>
+    </section>
+
+    <!-- Inputs grid -->
+    <div class="inputs-grid">
+
+      <!-- Resume Input -->
+      <section class="card" id="resume-section">
+        <h2>&#x1F4C4; Resume</h2>
+
+        <div class="tab-group">
+          <button class="tab-btn active" id="resume-tab-upload" onclick="switchResumeMode('upload')">Upload File</button>
+          <button class="tab-btn" id="resume-tab-paste" onclick="switchResumeMode('paste')">Paste Text</button>
+        </div>
+
+        <!-- Upload mode -->
+        <div id="resume-upload-area" class="drop-zone" onclick="document.getElementById('resume-file-input').click()">
+          <input type="file" id="resume-file-input" accept=".pdf,.docx,.doc" style="display:none" onchange="handleResumeFileChange(event)" />
+          <p id="resume-file-label">
+            Drop your resume here or <span class="link-text">browse</span>
+          </p>
+          <p class="hint">PDF or DOCX &middot; max 5 MB</p>
+        </div>
+
+        <!-- Paste mode -->
+        <div id="resume-paste-area" class="hidden flex-col-gap">
+          <textarea
+            id="resume-paste-text"
+            rows="8"
+            placeholder="Paste your resume text here&hellip;"
+            class="textarea"
+          ></textarea>
+          <button
+            id="resume-paste-btn"
+            class="btn btn-primary btn-self-end"
+            onclick="handleResumePasteSubmit()"
+          >Use This Resume</button>
+        </div>
+
+        <p id="resume-loading" class="status-loading hidden">Parsing file&hellip;</p>
+        <p id="resume-error" class="status-error hidden"></p>
+      </section>
+
+      <!-- JD Input -->
+      <section class="card" id="jd-section">
+        <h2>&#x1F4BC; Job Description</h2>
+
+        <div class="tab-group">
+          <button class="tab-btn active" id="jd-tab-paste" onclick="switchJDMode('paste')">Paste JD</button>
+          <button class="tab-btn" id="jd-tab-url" onclick="switchJDMode('url')">Paste JD Link</button>
+        </div>
+
+        <!-- Paste mode -->
+        <div id="jd-paste-area" class="flex-col-gap">
+          <textarea
+            id="jd-paste-text"
+            rows="8"
+            placeholder="Paste the job description here&hellip;"
+            class="textarea"
+          ></textarea>
+          <button
+            id="jd-paste-btn"
+            class="btn btn-primary btn-self-end"
+            onclick="handleJDPasteSubmit()"
+          >Use This JD</button>
+        </div>
+
+        <!-- URL mode -->
+        <div id="jd-url-area" class="hidden flex-col-gap">
+          <input
+            type="url"
+            id="jd-url-input"
+            placeholder="https://company.com/jobs/example-role"
+            class="input-field"
+          />
+          <button
+            id="jd-url-btn"
+            class="btn btn-primary btn-self-end"
+            onclick="handleJDUrlSubmit()"
+          >Fetch JD</button>
+        </div>
+
+        <p id="jd-error" class="status-error hidden"></p>
+      </section>
+
+    </div>
+
+    <!-- Status badges -->
+    <div class="badges-row">
+      <span id="badge-resume" class="badge badge-inactive">Resume not loaded</span>
+      <span id="badge-jd" class="badge badge-inactive">Job description not loaded</span>
+    </div>
+
+    <!-- Results Panel -->
+    <section class="card" id="results-section">
+      <div class="results-header">
+        <h2>&#x1F50D; Preview &amp; Results</h2>
+        <button
+          id="analyze-btn"
+          class="btn btn-primary"
+          onclick="handleAnalyze()"
+          disabled
+        >Analyze</button>
+      </div>
+
+      <div class="preview-grid">
+        <!-- Resume preview -->
+        <div>
+          <p class="preview-label">Resume Text</p>
+          <div class="preview-box">
+            <pre id="resume-preview" class="hidden preview-text"></pre>
+            <p id="resume-preview-empty" class="preview-empty">
+              No resume loaded yet. Upload a file or paste text above.
+            </p>
+          </div>
+        </div>
+
+        <!-- JD preview -->
+        <div>
+          <p class="preview-label">Job Description Text</p>
+          <div class="preview-box">
+            <pre id="jd-preview" class="hidden preview-text"></pre>
+            <p id="jd-preview-empty" class="preview-empty">
+              No job description loaded yet. Paste or link one above.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analyze result -->
+      <div id="analyze-result" class="analyze-result hidden">
+        <p id="analyze-message"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

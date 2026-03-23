@@ -1,0 +1,383 @@
+/* =========================================================
+   ResumeTailor – plain CSS (no Tailwind, no frameworks)
+   ========================================================= */
+
+/* ── Reset & base ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --slate-50:   #f8fafc;
+  --slate-100:  #f1f5f9;
+  --slate-200:  #e2e8f0;
+  --slate-300:  #cbd5e1;
+  --slate-400:  #94a3b8;
+  --slate-500:  #64748b;
+  --slate-600:  #475569;
+  --slate-700:  #334155;
+  --slate-800:  #1e293b;
+
+  --indigo-50:  #eef2ff;
+  --indigo-100: #e0e7ff;
+  --indigo-200: #c7d2fe;
+  --indigo-400: #818cf8;
+  --indigo-600: #4f46e5;
+  --indigo-700: #4338ca;
+
+  --green-100:  #dcfce7;
+  --green-700:  #15803d;
+
+  --red-500:    #ef4444;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--slate-50);
+  color: var(--slate-800);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout helpers ─────────────────────────────────────── */
+.container {
+  max-width: 64rem; /* ~1024px */
+  margin-left:  auto;
+  margin-right: auto;
+  padding-left:  1rem;
+  padding-right: 1rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.site-header {
+  background-color: #fff;
+  border-bottom: 1px solid var(--slate-200);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding-top:    1rem;
+  padding-bottom: 1rem;
+}
+
+.logo-badge {
+  width:  2rem;
+  height: 2rem;
+  border-radius: .5rem;
+  background-color: var(--indigo-600);
+  color: #fff;
+  font-size: .875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.site-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--slate-800);
+  letter-spacing: -.025em;
+}
+
+/* ── Main content ───────────────────────────────────────── */
+.main-content {
+  padding-top:    2.5rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.hero h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--slate-800);
+  letter-spacing: -.025em;
+}
+
+.hero p {
+  color: var(--slate-500);
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin-left:  auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ── Inputs grid ────────────────────────────────────────── */
+.inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .inputs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.card {
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 1px solid var(--slate-200);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  padding: 1.5rem;
+}
+
+.card h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  margin-bottom: 1rem;
+}
+
+/* ── Tab buttons ────────────────────────────────────────── */
+.tab-group {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1.25rem;
+}
+
+.tab-btn {
+  padding: .375rem 1rem;
+  border-radius: 9999px;
+  font-size: .875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color .15s, color .15s;
+  background-color: var(--slate-100);
+  color: var(--slate-600);
+}
+
+.tab-btn:hover {
+  background-color: var(--slate-200);
+}
+
+.tab-btn.active {
+  background-color: var(--indigo-600);
+  color: #fff;
+}
+
+/* ── Drop zone ──────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed var(--slate-300);
+  border-radius: .75rem;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .15s, background-color .15s;
+}
+
+.drop-zone:hover {
+  border-color: var(--indigo-400);
+  background-color: var(--indigo-50);
+}
+
+.drop-zone p {
+  color: var(--slate-500);
+  font-size: .875rem;
+}
+
+.link-text {
+  color: var(--indigo-600);
+  font-weight: 500;
+}
+
+.hint {
+  font-size: .75rem;
+  color: var(--slate-400);
+  margin-top: .25rem;
+}
+
+/* ── Flex column with gap (for paste areas) ─────────────── */
+.flex-col-gap {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+/* ── Textarea & input ───────────────────────────────────── */
+.textarea,
+.input-field {
+  width: 100%;
+  border: 1px solid var(--slate-300);
+  border-radius: .75rem;
+  padding: .75rem 1rem;
+  font-size: .875rem;
+  color: var(--slate-700);
+  background-color: #fff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.textarea {
+  resize: none;
+  line-height: 1.5;
+}
+
+.textarea:focus,
+.input-field:focus {
+  border-color: var(--indigo-400);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, .15);
+}
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn {
+  padding: .5rem 1.25rem;
+  font-size: .875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: background-color .15s, opacity .15s;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background-color: var(--indigo-600);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--indigo-700);
+}
+
+.btn-primary:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.btn-self-end {
+  align-self: flex-end;
+}
+
+/* ── Status messages ────────────────────────────────────── */
+.status-loading {
+  margin-top: .75rem;
+  font-size: .875rem;
+  color: var(--indigo-600);
+}
+
+.status-error {
+  margin-top: .75rem;
+  font-size: .875rem;
+  color: var(--red-500);
+}
+
+/* ── Badges row ─────────────────────────────────────────── */
+.badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;
+}
+
+.badge {
+  padding: .25rem .75rem;
+  border-radius: 9999px;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.badge-inactive {
+  background-color: var(--slate-100);
+  color: var(--slate-500);
+}
+
+.badge-active {
+  background-color: var(--green-100);
+  color: var(--green-700);
+}
+
+/* ── Results panel ──────────────────────────────────────── */
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.results-header h2 {
+  margin-bottom: 0;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .preview-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.preview-label {
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--slate-400);
+  margin-bottom: .5rem;
+}
+
+.preview-box {
+  background-color: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: .75rem;
+  padding: 1rem;
+  height: 14rem;
+  overflow-y: auto;
+}
+
+.preview-text {
+  font-size: .75rem;
+  color: var(--slate-700);
+  white-space: pre-wrap;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
+  line-height: 1.6;
+}
+
+.preview-empty {
+  font-size: .875rem;
+  color: var(--slate-400);
+  font-style: italic;
+}
+
+/* ── Analyze result ─────────────────────────────────────── */
+.analyze-result {
+  margin-top: 1rem;
+  border-radius: .75rem;
+  background-color: var(--indigo-50);
+  border: 1px solid var(--indigo-200);
+  padding: .75rem 1rem;
+}
+
+.analyze-result p {
+  font-size: .875rem;
+  color: var(--indigo-700);
+}

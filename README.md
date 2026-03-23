@@ -1,2 +1,89 @@
-# easy-jd
-A web-base tool that helps tailor resume to match any company's job description.
+# ResumeTailor (easy-jd)
+
+A web-based tool that helps you tailor your resume to match any company's job description.
+
+## Features
+
+- Upload a PDF or DOCX resume **or** paste resume text
+- Paste a job description **or** provide a job posting URL (content is fetched and cleaned automatically)
+- Side-by-side preview of the extracted resume and JD text
+- One-click **Analyze** button (matching logic placeholder, ready for future AI integration)
+- Simple, modern, responsive UI
+
+---
+
+## Project Structure
+
+```
+easy-jd/
+├── backend/          # FastAPI backend
+│   ├── app/
+│   │   ├── main.py           # FastAPI app & CORS setup
+│   │   ├── models/
+│   │   │   └── schemas.py    # Pydantic request/response models
+│   │   ├── routers/
+│   │   │   ├── resume.py     # /resume/upload and /resume/paste
+│   │   │   ├── jd.py         # /jd/paste and /jd/url
+│   │   │   └── analyze.py    # /analyze (placeholder)
+│   │   └── utils/
+│   │       ├── pdf_parser.py   # PDF text extraction
+│   │       ├── docx_parser.py  # DOCX text extraction
+│   │       ├── url_fetcher.py  # Fetch & clean JD from a URL
+│   │       └── matcher.py      # Placeholder matching/scoring logic
+│   └── requirements.txt
+└── frontend/         # Next.js 14 frontend
+    └── src/
+        ├── app/
+        │   ├── layout.tsx
+        │   ├── page.tsx        # Main page
+        │   └── globals.css
+        ├── components/
+        │   ├── Header.tsx
+        │   ├── ResumeInput.tsx
+        │   ├── JDInput.tsx
+        │   └── ResultsPanel.tsx
+        └── lib/
+            └── api.ts          # API client functions
+```
+
+---
+
+## Getting Started
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+The API will be available at `http://localhost:8000`.  
+Interactive docs: `http://localhost:8000/docs`.
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The app will be available at `http://localhost:3000`.
+
+> **Note:** The frontend talks to the backend at `http://localhost:8000` by default.  
+> Override by setting `NEXT_PUBLIC_API_URL` in `frontend/.env.local`.
+
+---
+
+## API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/resume/upload` | Upload a PDF/DOCX resume file |
+| `POST` | `/resume/paste` | Submit resume as plain text |
+| `POST` | `/jd/paste` | Submit job description as plain text |
+| `POST` | `/jd/url` | Fetch & extract JD text from a URL |
+| `POST` | `/analyze` | Placeholder: compare resume and JD |
+| `GET`  | `/health` | Health check |
+

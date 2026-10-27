@@ -1,6 +1,14 @@
 # ResumeTailor (easy-jd)
 
-A web-based tool that helps you tailor your resume to match any company's job description.
+A web application prototype for preparing resume and job-description text for comparison.
+
+**Stack:** Python · FastAPI · HTML/CSS/JavaScript
+
+**Status:** Resume/JD input and text-extraction workflows are present. The analysis endpoint and matching logic are placeholders; automated resume tailoring and AI analysis are not implemented.
+
+## Workflow
+
+Upload or paste a resume, supply a job description, and inspect the extracted text side by side. The project provides the input pipeline and interface for a future matching system.
 
 ## Features
 
